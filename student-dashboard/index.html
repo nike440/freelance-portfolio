@@ -1,0 +1,1111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>StudyOS — Student Dashboard</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- ================= SIDEBAR ================= -->
+
+    <aside class="sidebar">
+
+        <div class="sidebar-top">
+
+            <div class="brand">
+                <div class="brand-icon">✓</div>
+                <h2>StudyOS</h2>
+            </div>
+
+            <nav class="sidebar-nav">
+
+                <a href="#" class="nav-link active" data-section="dashboard">
+                    <span>⌂</span>
+                    <span>Dashboard</span>
+                </a>
+
+                <a href="#" class="nav-link" data-section="courses">
+                    <span>▣</span>
+                    <span>Courses</span>
+                </a>
+
+                <a href="#" class="nav-link" data-section="tasks">
+                    <span>✓</span>
+                    <span>Tasks</span>
+                </a>
+
+                <a href="#" class="nav-link" data-section="progress">
+                    <span>◈</span>
+                    <span>Progress</span>
+                </a>
+
+                <a href="#" class="nav-link" data-section="settings">
+                    <span>⚙</span>
+                    <span>Settings</span>
+                </a>
+
+            </nav>
+
+        </div>
+
+        <div class="sidebar-footer">
+
+            <div class="profile-mini">
+                <div class="profile-avatar">N</div>
+
+                <div>
+                    <strong>Nithin</strong>
+                    <small>CSE Student</small>
+                </div>
+            </div>
+
+        </div>
+
+    </aside>
+
+
+    <!-- ================= MAIN CONTENT ================= -->
+
+    <main class="main-content">
+
+
+        <!-- ================= DASHBOARD ================= -->
+
+        <section id="dashboard" class="page-section active">
+
+            <!-- HEADER -->
+
+            <header class="top-header">
+
+                <div class="student-info">
+                    <p class="eyebrow">STUDENT DASHBOARD</p>
+
+                    <h1>
+                        Welcome back, Nithin
+                        <span>👋</span>
+                    </h1>
+
+                    <p>
+                        Spring Semester 2026 • St. Peter's Engineering College
+                    </p>
+                </div>
+
+                <div class="header-date">
+                    <span>THURSDAY</span>
+                    <strong>03 SEP</strong>
+                </div>
+
+            </header>
+
+
+            <!-- ================= HERO ================= -->
+
+            <section class="hero-card">
+
+                <div class="hero-content">
+
+                    <p class="hero-label">
+                        FOCUS MODE
+                    </p>
+
+                    <h2>
+                        Deep work.<br>
+                        <span>Better results.</span>
+                    </h2>
+
+                    <p class="hero-description">
+                        Eliminate distractions and focus on one important task
+                        at a time.
+                    </p>
+
+                    <button class="hero-button" id="focusButton">
+                        <span>▶</span>
+                        START FOCUS
+                    </button>
+
+                </div>
+
+
+                <div class="hero-timer">
+
+                    <strong id="timerDisplay">25:00</strong>
+
+                    <span>
+                        FOCUS SESSION
+                    </span>
+
+                </div>
+
+            </section>
+
+
+            <!-- ================= QUICK ACTIONS ================= -->
+
+            <section class="quick-actions">
+
+                <button class="action-card" id="quickAddTask">
+
+                    <div class="action-icon">
+                        +
+                    </div>
+
+                    <div>
+                        <strong>Add Task</strong>
+                        <small>Quick entry</small>
+                    </div>
+
+                </button>
+
+
+                <button class="action-card" id="focusButtonSecondary">
+
+                    <div class="action-icon">
+                        ⏱
+                    </div>
+
+                    <div>
+                        <strong>Focus Session</strong>
+                        <small>25 min sprint</small>
+                    </div>
+
+                </button>
+
+            </section>
+
+
+            <!-- ================= STATS ================= -->
+
+            <section class="stats-grid">
+
+                <div class="stat-card">
+
+                    <span class="stat-label">
+                        TASKS TODAY
+                    </span>
+
+                    <strong id="taskCount">
+                        0
+                    </strong>
+
+                    <small>
+                        Tasks remaining
+                    </small>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <span class="stat-label">
+                        COMPLETION
+                    </span>
+
+                    <strong id="progressPercent">
+                        0%
+                    </strong>
+
+                    <small>
+                        Today's progress
+                    </small>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <span class="stat-label">
+                        ACTIVE COURSES
+                    </span>
+
+                    <strong>
+                        5
+                    </strong>
+
+                    <small>
+                        This semester
+                    </small>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <span class="stat-label">
+                        FOCUS TIME
+                    </span>
+
+                    <strong>
+                        0h
+                    </strong>
+
+                    <small>
+                        Today's focus
+                    </small>
+
+                </div>
+
+            </section>
+
+
+            <!-- ================= TODAY'S SCHEDULE ================= -->
+
+            <section class="dashboard-section">
+
+                <div class="section-heading">
+
+                    <div>
+                        <p class="eyebrow">
+                            TODAY
+                        </p>
+
+                        <h2>
+                            Schedule
+                        </h2>
+                    </div>
+
+                    <span class="section-date">
+                        03 September
+                    </span>
+
+                </div>
+
+
+                <div class="schedule-list">
+
+
+                    <!-- SCHEDULE ITEM 1 -->
+
+                    <div class="schedule-item completed">
+
+                        <div class="schedule-time">
+                            <strong>09:00</strong>
+                            <span>AM</span>
+                        </div>
+
+                        <div class="schedule-line">
+                            <span></span>
+                        </div>
+
+                        <div class="schedule-content">
+
+                            <div>
+                                <strong>
+                                    Java OOP
+                                </strong>
+
+                                <p>
+                                    Object-Oriented Programming
+                                </p>
+                            </div>
+
+                            <button class="schedule-status completed-status">
+                                ✓ Completed
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- SCHEDULE ITEM 2 -->
+
+                    <div class="schedule-item">
+
+                        <div class="schedule-time">
+                            <strong>11:00</strong>
+                            <span>AM</span>
+                        </div>
+
+                        <div class="schedule-line">
+                            <span></span>
+                        </div>
+
+                        <div class="schedule-content">
+
+                            <div>
+                                <strong>
+                                    DBMS
+                                </strong>
+
+                                <p>
+                                    Database Management Systems
+                                </p>
+                            </div>
+
+                            <button class="schedule-status">
+                                Upcoming
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- SCHEDULE ITEM 3 -->
+
+                    <div class="schedule-item">
+
+                        <div class="schedule-time">
+                            <strong>02:00</strong>
+                            <span>PM</span>
+                        </div>
+
+                        <div class="schedule-line">
+                            <span></span>
+                        </div>
+
+                        <div class="schedule-content">
+
+                            <div>
+                                <strong>
+                                    Web Development
+                                </strong>
+
+                                <p>
+                                    Build and improve StudyOS
+                                </p>
+                            </div>
+
+                            <button class="schedule-status">
+                                Upcoming
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- SCHEDULE ITEM 4 -->
+
+                    <div class="schedule-item">
+
+                        <div class="schedule-time">
+                            <strong>06:00</strong>
+                            <span>PM</span>
+                        </div>
+
+                        <div class="schedule-line">
+                            <span></span>
+                        </div>
+
+                        <div class="schedule-content">
+
+                            <div>
+                                <strong>
+                                    Focus Session
+                                </strong>
+
+                                <p>
+                                    Personal study • 25 minute sprint
+                                </p>
+                            </div>
+
+                            <button class="schedule-status">
+                                Upcoming
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- ================= TASKS + COURSES ================= -->
+
+            <section class="dashboard-columns">
+
+
+                <!-- TASKS -->
+
+                <div class="dashboard-panel">
+
+                    <div class="panel-header">
+
+                        <div>
+                            <p class="eyebrow">
+                                PRODUCTIVITY
+                            </p>
+
+                            <h2>
+                                Today's Tasks
+                            </h2>
+                        </div>
+
+                        <span>
+                            Focus
+                        </span>
+
+                    </div>
+
+
+                    <div class="task-list" id="dashboardTaskList">
+
+
+                        <label class="task">
+
+                            <input type="checkbox">
+
+                            <span class="task-check"></span>
+
+                            <span class="task-text">
+                                Practice Java OOP
+                            </span>
+
+                        </label>
+
+
+                        <label class="task">
+
+                            <input type="checkbox">
+
+                            <span class="task-check"></span>
+
+                            <span class="task-text">
+                                Study DBMS
+                            </span>
+
+                        </label>
+
+
+                        <label class="task">
+
+                            <input type="checkbox">
+
+                            <span class="task-check"></span>
+
+                            <span class="task-text">
+                                Complete Web Development
+                            </span>
+
+                        </label>
+
+
+                        <label class="task">
+
+                            <input type="checkbox">
+
+                            <span class="task-check"></span>
+
+                            <span class="task-text">
+                                Practice Python
+                            </span>
+
+                        </label>
+
+                    </div>
+
+                </div>
+
+
+                <!-- COURSES -->
+
+                <div class="dashboard-panel">
+
+                    <div class="panel-header">
+
+                        <div>
+                            <p class="eyebrow">
+                                LEARNING
+                            </p>
+
+                            <h2>
+                                Course Progress
+                            </h2>
+                        </div>
+
+                        <span>
+                            View all
+                        </span>
+
+                    </div>
+
+
+                    <div class="course-list">
+
+
+                        <div class="course-item">
+
+                            <div class="course-info">
+
+                                <div class="course-icon">
+                                    J
+                                </div>
+
+                                <div>
+                                    <strong>
+                                        Java OOP
+                                    </strong>
+
+                                    <small>
+                                        Programming
+                                    </small>
+                                </div>
+
+                            </div>
+
+                            <div class="course-progress">
+
+                                <div class="progress-top">
+                                    <span>80%</span>
+                                </div>
+
+                                <div class="progress-bar">
+                                    <span style="width: 80%;"></span>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="course-item">
+
+                            <div class="course-info">
+
+                                <div class="course-icon">
+                                    D
+                                </div>
+
+                                <div>
+                                    <strong>
+                                        DBMS
+                                    </strong>
+
+                                    <small>
+                                        Database Systems
+                                    </small>
+                                </div>
+
+                            </div>
+
+                            <div class="course-progress">
+
+                                <div class="progress-top">
+                                    <span>65%</span>
+                                </div>
+
+                                <div class="progress-bar">
+                                    <span style="width: 65%;"></span>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="course-item">
+
+                            <div class="course-info">
+
+                                <div class="course-icon">
+                                    W
+                                </div>
+
+                                <div>
+                                    <strong>
+                                        Web Development
+                                    </strong>
+
+                                    <small>
+                                        Full Stack
+                                    </small>
+                                </div>
+
+                            </div>
+
+                            <div class="course-progress">
+
+                                <div class="progress-top">
+                                    <span>55%</span>
+                                </div>
+
+                                <div class="progress-bar">
+                                    <span style="width: 55%;"></span>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- ================= MOTIVATION ================= -->
+
+            <section class="motivation-card">
+
+                <div class="motivation-icon">
+                    ✦
+                </div>
+
+                <div>
+
+                    <p class="eyebrow">
+                        DAILY REMINDER
+                    </p>
+
+                    <h3>
+                        Consistency beats motivation.
+                    </h3>
+
+                    <p>
+                        One focused session today is better than a perfect
+                        plan tomorrow.
+                    </p>
+
+                </div>
+
+            </section>
+
+        </section>
+
+
+
+        <!-- ================= COURSES PAGE ================= -->
+
+        <section id="courses" class="page-section">
+
+            <header class="page-header">
+
+                <div>
+                    <p class="eyebrow">
+                        LEARNING
+                    </p>
+
+                    <h1>
+                        Courses
+                    </h1>
+
+                    <p>
+                        Track your semester subjects and learning progress.
+                    </p>
+                </div>
+
+            </header>
+
+
+            <div class="course-grid">
+
+                <div class="dashboard-panel">
+                    <div class="course-icon">J</div>
+                    <h2>Java OOP</h2>
+                    <p>Object-Oriented Programming</p>
+
+                    <div class="progress-bar">
+                        <span style="width: 80%;"></span>
+                    </div>
+
+                    <strong>80% complete</strong>
+                </div>
+
+
+                <div class="dashboard-panel">
+                    <div class="course-icon">D</div>
+                    <h2>DBMS</h2>
+                    <p>Database Management Systems</p>
+
+                    <div class="progress-bar">
+                        <span style="width: 65%;"></span>
+                    </div>
+
+                    <strong>65% complete</strong>
+                </div>
+
+
+                <div class="dashboard-panel">
+                    <div class="course-icon">W</div>
+                    <h2>Web Development</h2>
+                    <p>Frontend & Backend Development</p>
+
+                    <div class="progress-bar">
+                        <span style="width: 55%;"></span>
+                    </div>
+
+                    <strong>55% complete</strong>
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ================= TASKS PAGE ================= -->
+
+        <section id="tasks" class="page-section">
+
+            <header class="page-header">
+
+                <div>
+                    <p class="eyebrow">
+                        PRODUCTIVITY
+                    </p>
+
+                    <h1>
+                        Tasks
+                    </h1>
+
+                    <p>
+                        Manage everything you need to complete.
+                    </p>
+                </div>
+
+                <button class="hero-button" id="addTaskPage">
+                    + ADD TASK
+                </button>
+
+            </header>
+
+
+            <div class="dashboard-panel">
+
+                <div class="panel-header">
+
+                    <div>
+                        <p class="eyebrow">
+                            TASK LIST
+                        </p>
+
+                        <h2>
+                            All Tasks
+                        </h2>
+                    </div>
+
+                </div>
+
+
+                <div class="task-list" id="allTaskList">
+
+                    <!-- Tasks will be populated by JavaScript -->
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ================= PROGRESS PAGE ================= -->
+
+        <section id="progress" class="page-section">
+
+            <header class="page-header">
+
+                <div>
+                    <p class="eyebrow">
+                        ANALYTICS
+                    </p>
+
+                    <h1>
+                        Your Progress
+                    </h1>
+
+                    <p>
+                        See how consistently you're moving forward.
+                    </p>
+                </div>
+
+            </header>
+
+
+            <div class="stats-grid">
+
+                <div class="stat-card">
+
+                    <span class="stat-label">
+                        COMPLETION
+                    </span>
+
+                    <strong id="progressPagePercent">
+                        0%
+                    </strong>
+
+                    <small>
+                        Today's progress
+                    </small>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <span class="stat-label">
+                        TASKS
+                    </span>
+
+                    <strong id="progressPageTasks">
+                        0
+                    </strong>
+
+                    <small>
+                        Total tasks
+                    </small>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <span class="stat-label">
+                        COURSES
+                    </span>
+
+                    <strong>
+                        5
+                    </strong>
+
+                    <small>
+                        Active courses
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <div class="dashboard-panel">
+
+                <div class="panel-header">
+
+                    <div>
+                        <p class="eyebrow">
+                            OVERVIEW
+                        </p>
+
+                        <h2>
+                            Learning Progress
+                        </h2>
+                    </div>
+
+                </div>
+
+
+                <div class="course-list">
+
+                    <div class="course-item">
+
+                        <div class="course-info">
+
+                            <div class="course-icon">
+                                J
+                            </div>
+
+                            <div>
+                                <strong>
+                                    Java OOP
+                                </strong>
+
+                                <small>
+                                    80% complete
+                                </small>
+                            </div>
+
+                        </div>
+
+                        <div class="course-progress">
+
+                            <div class="progress-bar">
+                                <span style="width: 80%;"></span>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="course-item">
+
+                        <div class="course-info">
+
+                            <div class="course-icon">
+                                D
+                            </div>
+
+                            <div>
+                                <strong>
+                                    DBMS
+                                </strong>
+
+                                <small>
+                                    65% complete
+                                </small>
+                            </div>
+
+                        </div>
+
+                        <div class="course-progress">
+
+                            <div class="progress-bar">
+                                <span style="width: 65%;"></span>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="course-item">
+
+                        <div class="course-info">
+
+                            <div class="course-icon">
+                                W
+                            </div>
+
+                            <div>
+                                <strong>
+                                    Web Development
+                                </strong>
+
+                                <small>
+                                    55% complete
+                                </small>
+                            </div>
+
+                        </div>
+
+                        <div class="course-progress">
+
+                            <div class="progress-bar">
+                                <span style="width: 55%;"></span>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ================= SETTINGS PAGE ================= -->
+
+        <section id="settings" class="page-section">
+
+            <header class="page-header">
+
+                <div>
+                    <p class="eyebrow">
+                        PREFERENCES
+                    </p>
+
+                    <h1>
+                        Settings
+                    </h1>
+
+                    <p>
+                        Customize your StudyOS experience.
+                    </p>
+                </div>
+
+            </header>
+
+
+            <div class="dashboard-panel">
+
+                <div class="panel-header">
+
+                    <div>
+                        <p class="eyebrow">
+                            PROFILE
+                        </p>
+
+                        <h2>
+                            Student Profile
+                        </h2>
+                    </div>
+
+                </div>
+
+
+                <div class="settings-content">
+
+                    <div class="setting-row">
+
+                        <div>
+                            <strong>
+                                Name
+                            </strong>
+
+                            <small>
+                                Your display name
+                            </small>
+                        </div>
+
+                        <span>
+                            Nithin
+                        </span>
+
+                    </div>
+
+
+                    <div class="setting-row">
+
+                        <div>
+                            <strong>
+                                Course
+                            </strong>
+
+                            <small>
+                                Current degree
+                            </small>
+                        </div>
+
+                        <span>
+                            B.E. Computer Science
+                        </span>
+
+                    </div>
+
+
+                    <div class="setting-row">
+
+                        <div>
+                            <strong>
+                                College
+                            </strong>
+
+                            <small>
+                                Institution
+                            </small>
+                        </div>
+
+                        <span>
+                            St. Peter's Engineering College
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+    </main>
+
+
+    <!-- ================= JAVASCRIPT ================= -->
+
+    <script src="script.js"></script>
+
+</body>
+</html>
