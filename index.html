@@ -2,684 +2,992 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
-
-    <meta
-        name="description"
-        content="Nithin V S — Web Developer creating modern digital experiences."
-    >
-
-    <title>Nithin V S — Web Developer</title>
+    <title>StudyOS — Student Dashboard</title>
 
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-    
+    <!-- ================= SIDEBAR ================= -->
 
+    <aside class="sidebar">
 
-    <!-- =========================================
-         NAVIGATION
-    ========================================== -->
-    <header class="site-header">
+        <div class="sidebar-top">
 
-        <a href="#home" class="logo">
-            N<span>.</span>
-        </a>
-
-        <nav class="main-nav">
-            <a href="#work">Work</a>
-            <a href="#about">About</a>
-            <a href="#services">Services</a>
-        </nav>
-
-        <a href="#contact" class="nav-contact">
-            Let's Talk
-        </a>
-
-    </header>
-
-
-    <!-- =========================================
-         SCROLL PROGRESS
-    ========================================== -->
-    <div class="scroll-progress">
-        <span></span>
-    </div>
-
-
-    <main>
-
-
-        <!-- =====================================
-             HERO / INTRODUCTION
-        ====================================== -->
-        <section class="hero" id="home">
-
-            <div class="hero-background">
-                <div class="grid"></div>
-                <div class="hero-glow"></div>
+            <div class="brand">
+                <div class="brand-icon">✓</div>
+                <h2>StudyOS</h2>
             </div>
 
-            <div class="hero-content">
+            <nav class="sidebar-nav">
 
-                <div class="hero-topline">
-                    <span class="status-dot"></span>
-                    <span>AVAILABLE FOR FREELANCE WORK</span>
+                <a href="#" class="nav-link active" data-section="dashboard">
+                    <span>⌂</span>
+                    <span>Dashboard</span>
+                </a>
+
+                <a href="#" class="nav-link" data-section="courses">
+                    <span>▣</span>
+                    <span>Courses</span>
+                </a>
+
+                <a href="#" class="nav-link" data-section="tasks">
+                    <span>✓</span>
+                    <span>Tasks</span>
+                </a>
+
+                <a href="#" class="nav-link" data-section="progress">
+                    <span>◈</span>
+                    <span>Progress</span>
+                </a>
+
+                <a href="#" class="nav-link" data-section="settings">
+                    <span>⚙</span>
+                    <span>Settings</span>
+                </a>
+
+            </nav>
+
+        </div>
+
+        <div class="sidebar-footer">
+
+            <div class="profile-mini">
+                <div class="profile-avatar">N</div>
+
+                <div>
+                    <strong>Nithin</strong>
+                    <small>CSE Student</small>
+                </div>
+            </div>
+
+        </div>
+
+    </aside>
+
+
+    <!-- ================= MAIN CONTENT ================= -->
+
+    <main class="main-content">
+
+
+        <!-- ================= DASHBOARD ================= -->
+
+        <section id="dashboard" class="page-section active">
+
+            <!-- HEADER -->
+
+            <header class="top-header">
+
+                <div class="student-info">
+                    <p class="eyebrow">STUDENT DASHBOARD</p>
+
+                    <h1>
+                        Welcome back, Nithin
+                        <span>👋</span>
+                    </h1>
+
+                    <p>
+                        Spring Semester 2026 • St. Peter's Engineering College
+                    </p>
                 </div>
 
-                <div class="hero-title">
+                <div class="header-date">
+                    <span>THURSDAY</span>
+                    <strong>03 SEP</strong>
+                </div>
 
-                    <p class="hero-small">
-                        I'M NITHIN — WEB DEVELOPER
+            </header>
+
+
+            <!-- ================= HERO ================= -->
+
+            <section class="hero-card">
+
+                <div class="hero-content">
+
+                    <p class="hero-label">
+                        FOCUS MODE
+                    </p>
+
+                    <h2>
+                        Deep work.<br>
+                        <span>Better results.</span>
+                    </h2>
+
+                    <p class="hero-description">
+                        Eliminate distractions and focus on one important task
+                        at a time.
+                    </p>
+
+                    <button class="hero-button" id="focusButton">
+                        <span>▶</span>
+                        START FOCUS
+                    </button>
+
+                </div>
+
+
+                <div class="hero-timer">
+
+                    <strong id="timerDisplay">25:00</strong>
+
+                    <span>
+                        FOCUS SESSION
+                    </span>
+
+                </div>
+
+            </section>
+
+
+            <!-- ================= QUICK ACTIONS ================= -->
+
+            <section class="quick-actions">
+
+                <button class="action-card" id="quickAddTask">
+
+                    <div class="action-icon">
+                        +
+                    </div>
+
+                    <div>
+                        <strong>Add Task</strong>
+                        <small>Quick entry</small>
+                    </div>
+
+                </button>
+
+
+                <button class="action-card" id="focusButtonSecondary">
+
+                    <div class="action-icon">
+                        ⏱
+                    </div>
+
+                    <div>
+                        <strong>Focus Session</strong>
+                        <small>25 min sprint</small>
+                    </div>
+
+                </button>
+
+            </section>
+
+
+            <!-- ================= STATS ================= -->
+
+            <section class="stats-grid">
+
+                <div class="stat-card">
+
+                    <span class="stat-label">
+                        TASKS TODAY
+                    </span>
+
+                    <strong id="taskCount">
+                        0
+                    </strong>
+
+                    <small>
+                        Tasks remaining
+                    </small>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <span class="stat-label">
+                        COMPLETION
+                    </span>
+
+                    <strong id="progressPercent">
+                        0%
+                    </strong>
+
+                    <small>
+                        Today's progress
+                    </small>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <span class="stat-label">
+                        ACTIVE COURSES
+                    </span>
+
+                    <strong>
+                        5
+                    </strong>
+
+                    <small>
+                        This semester
+                    </small>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <span class="stat-label">
+                        FOCUS TIME
+                    </span>
+
+                    <strong>
+                        0h
+                    </strong>
+
+                    <small>
+                        Today's focus
+                    </small>
+
+                </div>
+
+            </section>
+
+
+            <!-- ================= TODAY'S SCHEDULE ================= -->
+
+            <section class="dashboard-section">
+
+                <div class="section-heading">
+
+                    <div>
+                        <p class="eyebrow">
+                            TODAY
+                        </p>
+
+                        <h2>
+                            Schedule
+                        </h2>
+                    </div>
+
+                    <span class="section-date">
+                        03 September
+                    </span>
+
+                </div>
+
+
+                <div class="schedule-list">
+
+
+                    <!-- SCHEDULE ITEM 1 -->
+
+                    <div class="schedule-item completed">
+
+                        <div class="schedule-time">
+                            <strong>09:00</strong>
+                            <span>AM</span>
+                        </div>
+
+                        <div class="schedule-line">
+                            <span></span>
+                        </div>
+
+                        <div class="schedule-content">
+
+                            <div>
+                                <strong>
+                                    Java OOP
+                                </strong>
+
+                                <p>
+                                    Object-Oriented Programming
+                                </p>
+                            </div>
+
+                            <button class="schedule-status completed-status">
+                                ✓ Completed
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- SCHEDULE ITEM 2 -->
+
+                    <div class="schedule-item">
+
+                        <div class="schedule-time">
+                            <strong>11:00</strong>
+                            <span>AM</span>
+                        </div>
+
+                        <div class="schedule-line">
+                            <span></span>
+                        </div>
+
+                        <div class="schedule-content">
+
+                            <div>
+                                <strong>
+                                    DBMS
+                                </strong>
+
+                                <p>
+                                    Database Management Systems
+                                </p>
+                            </div>
+
+                            <button class="schedule-status">
+                                Upcoming
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- SCHEDULE ITEM 3 -->
+
+                    <div class="schedule-item">
+
+                        <div class="schedule-time">
+                            <strong>02:00</strong>
+                            <span>PM</span>
+                        </div>
+
+                        <div class="schedule-line">
+                            <span></span>
+                        </div>
+
+                        <div class="schedule-content">
+
+                            <div>
+                                <strong>
+                                    Web Development
+                                </strong>
+
+                                <p>
+                                    Build and improve StudyOS
+                                </p>
+                            </div>
+
+                            <button class="schedule-status">
+                                Upcoming
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- SCHEDULE ITEM 4 -->
+
+                    <div class="schedule-item">
+
+                        <div class="schedule-time">
+                            <strong>06:00</strong>
+                            <span>PM</span>
+                        </div>
+
+                        <div class="schedule-line">
+                            <span></span>
+                        </div>
+
+                        <div class="schedule-content">
+
+                            <div>
+                                <strong>
+                                    Focus Session
+                                </strong>
+
+                                <p>
+                                    Personal study • 25 minute sprint
+                                </p>
+                            </div>
+
+                            <button class="schedule-status">
+                                Upcoming
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- ================= TASKS + COURSES ================= -->
+
+            <section class="dashboard-columns">
+
+
+                <!-- TASKS -->
+
+                <div class="dashboard-panel">
+
+                    <div class="panel-header">
+
+                        <div>
+                            <p class="eyebrow">
+                                PRODUCTIVITY
+                            </p>
+
+                            <h2>
+                                Today's Tasks
+                            </h2>
+                        </div>
+
+                        <span>
+                            Focus
+                        </span>
+
+                    </div>
+
+
+                    <div class="task-list" id="dashboardTaskList">
+
+
+                        <label class="task">
+
+                            <input type="checkbox">
+
+                            <span class="task-check"></span>
+
+                            <span class="task-text">
+                                Practice Java OOP
+                            </span>
+
+                        </label>
+
+
+                        <label class="task">
+
+                            <input type="checkbox">
+
+                            <span class="task-check"></span>
+
+                            <span class="task-text">
+                                Study DBMS
+                            </span>
+
+                        </label>
+
+
+                        <label class="task">
+
+                            <input type="checkbox">
+
+                            <span class="task-check"></span>
+
+                            <span class="task-text">
+                                Complete Web Development
+                            </span>
+
+                        </label>
+
+
+                        <label class="task">
+
+                            <input type="checkbox">
+
+                            <span class="task-check"></span>
+
+                            <span class="task-text">
+                                Practice Python
+                            </span>
+
+                        </label>
+
+                    </div>
+
+                </div>
+
+
+                <!-- COURSES -->
+
+                <div class="dashboard-panel">
+
+                    <div class="panel-header">
+
+                        <div>
+                            <p class="eyebrow">
+                                LEARNING
+                            </p>
+
+                            <h2>
+                                Course Progress
+                            </h2>
+                        </div>
+
+                        <span>
+                            View all
+                        </span>
+
+                    </div>
+
+
+                    <div class="course-list">
+
+
+                        <div class="course-item">
+
+                            <div class="course-info">
+
+                                <div class="course-icon">
+                                    J
+                                </div>
+
+                                <div>
+                                    <strong>
+                                        Java OOP
+                                    </strong>
+
+                                    <small>
+                                        Programming
+                                    </small>
+                                </div>
+
+                            </div>
+
+                            <div class="course-progress">
+
+                                <div class="progress-top">
+                                    <span>80%</span>
+                                </div>
+
+                                <div class="progress-bar">
+                                    <span style="width: 80%;"></span>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="course-item">
+
+                            <div class="course-info">
+
+                                <div class="course-icon">
+                                    D
+                                </div>
+
+                                <div>
+                                    <strong>
+                                        DBMS
+                                    </strong>
+
+                                    <small>
+                                        Database Systems
+                                    </small>
+                                </div>
+
+                            </div>
+
+                            <div class="course-progress">
+
+                                <div class="progress-top">
+                                    <span>65%</span>
+                                </div>
+
+                                <div class="progress-bar">
+                                    <span style="width: 65%;"></span>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="course-item">
+
+                            <div class="course-info">
+
+                                <div class="course-icon">
+                                    W
+                                </div>
+
+                                <div>
+                                    <strong>
+                                        Web Development
+                                    </strong>
+
+                                    <small>
+                                        Full Stack
+                                    </small>
+                                </div>
+
+                            </div>
+
+                            <div class="course-progress">
+
+                                <div class="progress-top">
+                                    <span>55%</span>
+                                </div>
+
+                                <div class="progress-bar">
+                                    <span style="width: 55%;"></span>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- ================= MOTIVATION ================= -->
+
+            <section class="motivation-card">
+
+                <div class="motivation-icon">
+                    ✦
+                </div>
+
+                <div>
+
+                    <p class="eyebrow">
+                        DAILY REMINDER
+                    </p>
+
+                    <h3>
+                        Consistency beats motivation.
+                    </h3>
+
+                    <p>
+                        One focused session today is better than a perfect
+                        plan tomorrow.
+                    </p>
+
+                </div>
+
+            </section>
+
+        </section>
+
+
+
+        <!-- ================= COURSES PAGE ================= -->
+
+        <section id="courses" class="page-section">
+
+            <header class="page-header">
+
+                <div>
+                    <p class="eyebrow">
+                        LEARNING
                     </p>
 
                     <h1>
-                        I BUILD
-                        <span>DIGITAL</span>
-                        EXPERIENCES.
+                        Courses
                     </h1>
 
+                    <p>
+                        Track your semester subjects and learning progress.
+                    </p>
                 </div>
 
-                <div class="hero-bottom">
+            </header>
 
-                    <p class="hero-description">
-                        I create modern, responsive and
-                        user-focused websites using
-                        HTML, CSS and JavaScript.
+
+            <div class="course-grid">
+
+                <div class="dashboard-panel">
+                    <div class="course-icon">J</div>
+                    <h2>Java OOP</h2>
+                    <p>Object-Oriented Programming</p>
+
+                    <div class="progress-bar">
+                        <span style="width: 80%;"></span>
+                    </div>
+
+                    <strong>80% complete</strong>
+                </div>
+
+
+                <div class="dashboard-panel">
+                    <div class="course-icon">D</div>
+                    <h2>DBMS</h2>
+                    <p>Database Management Systems</p>
+
+                    <div class="progress-bar">
+                        <span style="width: 65%;"></span>
+                    </div>
+
+                    <strong>65% complete</strong>
+                </div>
+
+
+                <div class="dashboard-panel">
+                    <div class="course-icon">W</div>
+                    <h2>Web Development</h2>
+                    <p>Frontend & Backend Development</p>
+
+                    <div class="progress-bar">
+                        <span style="width: 55%;"></span>
+                    </div>
+
+                    <strong>55% complete</strong>
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ================= TASKS PAGE ================= -->
+
+        <section id="tasks" class="page-section">
+
+            <header class="page-header">
+
+                <div>
+                    <p class="eyebrow">
+                        PRODUCTIVITY
                     </p>
 
-                    <a href="#work" class="hero-cta">
-                        <span>Explore my work</span>
-                        <span class="arrow">↘</span>
-                    </a>
-
-                </div>
-
-            </div>
-
-            <div class="hero-scroll">
-                <span>SCROLL TO EXPLORE</span>
-                <div class="scroll-line"></div>
-            </div>
-
-        </section>
-
-
-        <!-- =====================================
-             INTRO STATEMENT
-        ====================================== -->
-        <section class="statement">
-
-            <div class="section-number">
-                01 / INTRO
-            </div>
-
-            <h2>
-                Websites should not
-                <span>just work.</span>
-                They should be remembered.
-            </h2>
-
-        </section>
-
-
-        <!-- =====================================
-             SELECTED WORK
-        ====================================== -->
-        <section class="work-section" id="work">
-
-            <div class="section-heading">
-
-                <div>
-                    <span class="eyebrow">SELECTED WORK</span>
-
-                    <h2>
-                        Projects
-                    </h2>
-                </div>
-
-                <span class="work-count">
-                    03 PROJECTS
-                </span>
-
-            </div>
-
-
-            <!-- =================================
-                 PROJECT 01 — STUDYOS
-            ================================== -->
-            <article class="project project-one">
-
-                <div class="project-meta">
-
-                    <span class="project-number">
-                        01
-                    </span>
-
-                    <span class="project-category">
-                        WEB APPLICATION
-                    </span>
-
-                </div>
-
-
-                <div class="project-visual">
-
-                    <div class="project-image-placeholder studyos-preview">
-
-    <!-- Browser -->
-    <div class="studyos-browser">
-
-        <div class="studyos-browser-dots">
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
-
-        <div class="studyos-url">
-            studyos.app
-        </div>
-
-    </div>
-
-
-    <!-- App -->
-    <div class="studyos-app">
-
-        <!-- Sidebar -->
-        <aside class="studyos-sidebar">
-
-            <div class="studyos-brand">
-                <span class="studyos-brand-mark">✓</span>
-                <span>StudyOS</span>
-            </div>
-
-            <div class="studyos-nav">
-
-                <div class="studyos-nav-item active">
-                    <span>▦</span>
-                    Dashboard
-                </div>
-
-                <div class="studyos-nav-item">
-                    <span>▤</span>
-                    Courses
-                </div>
-
-                <div class="studyos-nav-item">
-                    <span>✓</span>
-                    Tasks
-                </div>
-
-                <div class="studyos-nav-item">
-                    <span>◔</span>
-                    Progress
-                </div>
-
-                <div class="studyos-nav-item">
-                    <span>⚙</span>
-                    Settings
-                </div>
-
-            </div>
-
-            <div class="studyos-sidebar-bottom">
-                <span>2026</span>
-                <small>STUDENT WORKSPACE</small>
-            </div>
-
-        </aside>
-
-
-        <!-- Main dashboard -->
-        <main class="studyos-dashboard">
-
-            <div class="studyos-dashboard-top">
-
-                <div>
-                    <small>WELCOME BACK</small>
-
-                    <h3>
-                        Nithin <span>👋</span>
-                    </h3>
+                    <h1>
+                        Tasks
+                    </h1>
 
                     <p>
-                        Stay focused. Keep moving forward.
+                        Manage everything you need to complete.
                     </p>
                 </div>
 
-                <div class="studyos-profile">
-                    N
+                <button class="hero-button" id="addTaskPage">
+                    + ADD TASK
+                </button>
+
+            </header>
+
+
+            <div class="dashboard-panel">
+
+                <div class="panel-header">
+
+                    <div>
+                        <p class="eyebrow">
+                            TASK LIST
+                        </p>
+
+                        <h2>
+                            All Tasks
+                        </h2>
+                    </div>
+
+                </div>
+
+
+                <div class="task-list" id="allTaskList">
+
+                    <!-- Tasks will be populated by JavaScript -->
+
                 </div>
 
             </div>
 
+        </section>
 
-            <!-- Focus card -->
-            <div class="studyos-focus">
 
-                <div class="studyos-focus-content">
 
-                    <small>FOCUS SESSION</small>
+        <!-- ================= PROGRESS PAGE ================= -->
 
-                    <strong>
-                        25:00
+        <section id="progress" class="page-section">
+
+            <header class="page-header">
+
+                <div>
+                    <p class="eyebrow">
+                        ANALYTICS
+                    </p>
+
+                    <h1>
+                        Your Progress
+                    </h1>
+
+                    <p>
+                        See how consistently you're moving forward.
+                    </p>
+                </div>
+
+            </header>
+
+
+            <div class="stats-grid">
+
+                <div class="stat-card">
+
+                    <span class="stat-label">
+                        COMPLETION
+                    </span>
+
+                    <strong id="progressPagePercent">
+                        0%
                     </strong>
 
-                    <span>
-                        Deep work session
-                    </span>
+                    <small>
+                        Today's progress
+                    </small>
 
                 </div>
 
-                <div class="studyos-focus-button">
-                    ▶
+
+                <div class="stat-card">
+
+                    <span class="stat-label">
+                        TASKS
+                    </span>
+
+                    <strong id="progressPageTasks">
+                        0
+                    </strong>
+
+                    <small>
+                        Total tasks
+                    </small>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <span class="stat-label">
+                        COURSES
+                    </span>
+
+                    <strong>
+                        5
+                    </strong>
+
+                    <small>
+                        Active courses
+                    </small>
+
                 </div>
 
             </div>
 
 
-            <!-- Stats -->
-            <div class="studyos-stat-grid">
+            <div class="dashboard-panel">
 
-                <div class="studyos-stat">
-                    <small>TASKS TODAY</small>
-                    <strong>04</strong>
-                    <span>Tasks remaining</span>
-                </div>
-
-                <div class="studyos-stat">
-                    <small>COMPLETION</small>
-                    <strong>72%</strong>
-                    <span>Today's progress</span>
-                </div>
-
-                <div class="studyos-stat">
-                    <small>FOCUS TIME</small>
-                    <strong>2.4h</strong>
-                    <span>Today's focus</span>
-                </div>
-
-            </div>
-
-
-            <!-- Lower dashboard -->
-            <div class="studyos-lower">
-
-                <!-- Schedule -->
-                <div class="studyos-panel">
-
-                    <div class="studyos-panel-heading">
-
-                        <div>
-                            <small>TODAY</small>
-                            <h4>Schedule</h4>
-                        </div>
-
-                        <span>VIEW ALL</span>
-
-                    </div>
-
-                    <div class="studyos-schedule">
-
-                        <div>
-                            <b>09:00</b>
-                            <span>Java OOP</span>
-                            <em>✓</em>
-                        </div>
-
-                        <div>
-                            <b>11:00</b>
-                            <span>DBMS</span>
-                            <em>→</em>
-                        </div>
-
-                        <div>
-                            <b>14:00</b>
-                            <span>Web Development</span>
-                            <em>→</em>
-                        </div>
-
-                    </div>
-
-                </div>
-
-
-                <!-- Courses -->
-                <div class="studyos-panel">
-
-                    <div class="studyos-panel-heading">
-
-                        <div>
-                            <small>LEARNING</small>
-                            <h4>Courses</h4>
-                        </div>
-
-                        <span>03 ACTIVE</span>
-
-                    </div>
-
-                    <div class="studyos-course">
-
-                        <div class="studyos-course-title">
-                            <span>Java OOP</span>
-                            <b>80%</b>
-                        </div>
-
-                        <div class="studyos-progress">
-                            <span style="width:80%"></span>
-                        </div>
-
-                    </div>
-
-                    <div class="studyos-course">
-
-                        <div class="studyos-course-title">
-                            <span>DBMS</span>
-                            <b>65%</b>
-                        </div>
-
-                        <div class="studyos-progress">
-                            <span style="width:65%"></span>
-                        </div>
-
-                    </div>
-
-                    <div class="studyos-course">
-
-                        <div class="studyos-course-title">
-                            <span>Web Development</span>
-                            <b>55%</b>
-                        </div>
-
-                        <div class="studyos-progress">
-                            <span style="width:55%"></span>
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </main>
-
-    </div>
-
-</div>
-
-
-                <a href="../student-dashboard/index.html"
-   class="project-link"
-   target="_blank"
-   rel="noopener noreferrer">
-    VIEW PROJECT
-    <span>↗</span>
-</a>
-
-            </article>
-
-
-
-            <!-- =================================
-                 PROJECT 02
-            ================================== -->
-            <article class="project project-two">
-
-                <div class="project-meta">
-
-                    <span class="project-number">
-                        02
-                    </span>
-
-                    <span class="project-category">
-                        LANDING PAGE
-                    </span>
-
-                </div>
-
-
-                <div class="project-visual">
-
-                    <div class="project-image-placeholder gym-preview">
-
-                        <div class="performance-topbar">
-                            <div class="performance-logo">PERFORMANCE<span>.</span></div>
-                            <div class="performance-nav">
-                                <span>TRAIN</span>
-                                <span>PROGRAMS</span>
-                                <span>ABOUT</span>
-                            </div>
-                            <div class="performance-menu">MENU</div>
-                        </div>
-
-                        <div class="performance-hero-copy">
-                            <span class="performance-kicker">NO EXCUSES / JUST PROGRESS</span>
-
-                            <h3>
-                                TRAIN<br>
-                                <span>HARDER.</span>
-                            </h3>
-
-                            <p>
-                                BUILD STRENGTH.<br>
-                                BUILD DISCIPLINE.
-                            </p>
-
-                            <div class="performance-actions">
-                                <div class="performance-button">START TRAINING ↗</div>
-                                <div class="performance-note">01 / 03</div>
-                            </div>
-                        </div>
-
-                        <div class="performance-orbit">
-                            <div class="performance-ring ring-one"></div>
-                            <div class="performance-ring ring-two"></div>
-                            <div class="performance-core">P</div>
-                        </div>
-
-                        <div class="performance-stats">
-                            <div>
-                                <strong>06</strong>
-                                <span>WEEK PROGRAM</span>
-                            </div>
-                            <div>
-                                <strong>24</strong>
-                                <span>WORKOUTS</span>
-                            </div>
-                            <div>
-                                <strong>∞</strong>
-                                <span>LIMITS</span>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-
-                <div class="project-info">
+                <div class="panel-header">
 
                     <div>
-                        <h3>
-                            Performance
-                        </h3>
-
-                        <p>
-                            A bold fitness landing page
-                            focused on strong visual hierarchy,
-                            conversion and responsive design.
+                        <p class="eyebrow">
+                            OVERVIEW
                         </p>
-                    </div>
 
-                    <div class="project-details">
-
-                        <span>HTML</span>
-                        <span>CSS</span>
-                        <span>RESPONSIVE</span>
-
+                        <h2>
+                            Learning Progress
+                        </h2>
                     </div>
 
                 </div>
 
 
-                <a href="../performance-gym/index.html"
-   class="project-link"
-   target="_blank"
-   rel="noopener noreferrer">
-    VIEW PROJECT
-    <span>↗</span>
-</a>
-            </article>
+                <div class="course-list">
 
+                    <div class="course-item">
 
+                        <div class="course-info">
 
-            <!-- =================================
-                 PROJECT 03
-            ================================== -->
-            <article class="project project-three">
-
-                <div class="project-meta">
-
-                    <span class="project-number">
-                        03
-                    </span>
-
-                    <span class="project-category">
-                        CREATIVE WEBSITE
-                    </span>
-
-                </div>
-
-
-                <div class="project-visual">
-
-                    <div class="project-image-placeholder restaurant-preview">
-
-                        <div class="atelier-frame">
-
-                            <div class="atelier-top">
-                                <span>ATELIER</span>
-                                <span>EST. 2026</span>
-                                <span>CHENNAI</span>
+                            <div class="course-icon">
+                                J
                             </div>
 
-                            <div class="atelier-main">
+                            <div>
+                                <strong>
+                                    Java OOP
+                                </strong>
 
-                                <div class="atelier-side-label">
-                                    MODERN DINING / EXPERIENCE
-                                </div>
-
-                                <div class="atelier-title">
-                                    <span>TASTE</span>
-                                    <span>THE</span>
-                                    <span>MOMENT.</span>
-                                </div>
-
-                                <div class="atelier-copy">
-                                    <span>01</span>
-                                    <p>
-                                        A contemporary dining
-                                        experience shaped by
-                                        atmosphere, craft and detail.
-                                    </p>
-                                </div>
-
-                                <div class="atelier-circle">
-                                    <div class="atelier-circle-inner">
-                                        <span>DISCOVER</span>
-                                        <b>↘</b>
-                                    </div>
-                                </div>
-
+                                <small>
+                                    80% complete
+                                </small>
                             </div>
 
-                            <div class="atelier-bottom">
-                                <span>RESTAURANT / BAR / EVENTS</span>
-                                <span>SCROLL TO EXPLORE ↓</span>
+                        </div>
+
+                        <div class="course-progress">
+
+                            <div class="progress-bar">
+                                <span style="width: 80%;"></span>
                             </div>
 
                         </div>
 
                     </div>
-                </div>
 
-                <div class="project-info">
 
-                    <div>
-                        <h3>
-                            Atelier
-                        </h3>
+                    <div class="course-item">
 
-                        <p>
-                            An editorial restaurant website
-                            combining immersive visuals,
-                            elegant typography and a
-                            cinematic browsing experience.
-                        </p>
+                        <div class="course-info">
+
+                            <div class="course-icon">
+                                D
+                            </div>
+
+                            <div>
+                                <strong>
+                                    DBMS
+                                </strong>
+
+                                <small>
+                                    65% complete
+                                </small>
+                            </div>
+
+                        </div>
+
+                        <div class="course-progress">
+
+                            <div class="progress-bar">
+                                <span style="width: 65%;"></span>
+                            </div>
+
+                        </div>
+
                     </div>
 
-                    <div class="project-details">
 
-                        <span>DESIGN</span>
-                        <span>HTML</span>
-                        <span>CSS</span>
+                    <div class="course-item">
+
+                        <div class="course-info">
+
+                            <div class="course-icon">
+                                W
+                            </div>
+
+                            <div>
+                                <strong>
+                                    Web Development
+                                </strong>
+
+                                <small>
+                                    55% complete
+                                </small>
+                            </div>
+
+                        </div>
+
+                        <div class="course-progress">
+
+                            <div class="progress-bar">
+                                <span style="width: 55%;"></span>
+                            </div>
+
+                        </div>
 
                     </div>
 
                 </div>
-
-
-       <a href="../atelier/index.html"
-   class="project-link"
-   target="_blank"
-   rel="noopener noreferrer">
-    VIEW PROJECT
-    <span>↗</span>
-</a>
-            </article>
-
-        </section>
-
-
-
-        <!-- =====================================
-             ABOUT
-        ====================================== -->
-        <section class="about-section" id="about">
-
-            <div class="section-number">
-                02 / ABOUT
-            </div>
-
-            <div class="about-content">
-
-                <span class="eyebrow">
-                    A LITTLE ABOUT ME
-                </span>
-
-                <h2>
-                    Building on the
-                    <span>web.</span>
-                </h2>
-
-                <p>
-                    I'm Nithin, a Computer Science student
-                    and web developer focused on creating
-                    clean, modern and responsive digital
-                    experiences.
-                </p>
-
-                <p>
-                    I combine development, design thinking
-                    and AI-assisted workflows to turn ideas
-                    into functional websites quickly.
-                </p>
 
             </div>
 
@@ -687,116 +995,103 @@
 
 
 
-        <!-- =====================================
-             SERVICES
-        ====================================== -->
-        <section class="services-section" id="services">
+        <!-- ================= SETTINGS PAGE ================= -->
 
-            <div class="section-heading">
+        <section id="settings" class="page-section">
+
+            <header class="page-header">
 
                 <div>
-                    <span class="eyebrow">
-                        WHAT I DO
-                    </span>
-
-                    <h2>
-                        Services
-                    </h2>
-                </div>
-
-            </div>
-
-
-            <div class="services-list">
-
-                <div class="service">
-
-                    <span class="service-number">
-                        01
-                    </span>
-
-                    <h3>
-                        Landing Pages
-                    </h3>
-
-                    <p>
-                        Clean, responsive landing pages
-                        designed to present a product,
-                        service or idea clearly.
+                    <p class="eyebrow">
+                        PREFERENCES
                     </p>
 
-                    <span class="service-arrow">
-                        ↗
-                    </span>
+                    <h1>
+                        Settings
+                    </h1>
+
+                    <p>
+                        Customize your StudyOS experience.
+                    </p>
+                </div>
+
+            </header>
+
+
+            <div class="dashboard-panel">
+
+                <div class="panel-header">
+
+                    <div>
+                        <p class="eyebrow">
+                            PROFILE
+                        </p>
+
+                        <h2>
+                            Student Profile
+                        </h2>
+                    </div>
 
                 </div>
 
 
-                <div class="service">
+                <div class="settings-content">
 
-                    <span class="service-number">
-                        02
-                    </span>
+                    <div class="setting-row">
 
-                    <h3>
-                        Portfolio Websites
-                    </h3>
+                        <div>
+                            <strong>
+                                Name
+                            </strong>
 
-                    <p>
-                        Personal websites that present
-                        your work, identity and skills
-                        with a strong visual presence.
-                    </p>
+                            <small>
+                                Your display name
+                            </small>
+                        </div>
 
-                    <span class="service-arrow">
-                        ↗
-                    </span>
+                        <span>
+                            Nithin
+                        </span>
 
-                </div>
+                    </div>
 
 
-                <div class="service">
+                    <div class="setting-row">
 
-                    <span class="service-number">
-                        03
-                    </span>
+                        <div>
+                            <strong>
+                                Course
+                            </strong>
 
-                    <h3>
-                        Website Fixes
-                    </h3>
+                            <small>
+                                Current degree
+                            </small>
+                        </div>
 
-                    <p>
-                        HTML, CSS and JavaScript fixes,
-                        responsive improvements and
-                        interface adjustments.
-                    </p>
+                        <span>
+                            B.E. Computer Science
+                        </span>
 
-                    <span class="service-arrow">
-                        ↗
-                    </span>
-
-                </div>
+                    </div>
 
 
-                <div class="service">
+                    <div class="setting-row">
 
-                    <span class="service-number">
-                        04
-                    </span>
+                        <div>
+                            <strong>
+                                College
+                            </strong>
 
-                    <h3>
-                        Responsive Design
-                    </h3>
+                            <small>
+                                Institution
+                            </small>
+                        </div>
 
-                    <p>
-                        Websites that adapt smoothly
-                        across desktop, tablet and
-                        mobile screens.
-                    </p>
+                        <span>
+                            St. Peter's Engineering College
+                        </span>
 
-                    <span class="service-arrow">
-                        ↗
-                    </span>
+                    </div>
 
                 </div>
 
@@ -804,80 +1099,12 @@
 
         </section>
 
-
-
-        <!-- =====================================
-             CONTACT
-        ====================================== -->
-        <section class="contact-section" id="contact">
-
-            <div class="contact-background">
-                <div class="contact-grid"></div>
-            </div>
-
-            <div class="contact-content">
-
-                <span class="eyebrow">
-                    HAVE AN IDEA?
-                </span>
-
-                <h2>
-                    LET'S BUILD
-                    <span>SOMETHING.</span>
-                </h2>
-
-                <a href="mailto:your-email@example.com"
-                   class="contact-button">
-
-                    <span>Let's talk</span>
-                    <span>↗</span>
-
-                </a>
-
-            </div>
-
-        </section>
 
     </main>
 
 
+    <!-- ================= JAVASCRIPT ================= -->
 
-    <!-- =========================================
-         FOOTER
-    ========================================== -->
-    <footer class="site-footer">
-
-        <div class="footer-logo">
-            N<span>.</span>
-        </div>
-
-        <div class="footer-middle">
-            © 2026 Nithin V S
-        </div>
-
-        <div class="footer-links">
-
-            <a href="#" target="_blank">
-                GitHub
-            </a>
-
-            <a href="#" target="_blank">
-                LinkedIn
-            </a>
-
-            <a href="mailto:your-email@example.com">
-                Email
-            </a>
-
-        </div>
-
-    </footer>
-
-
-
-    <!-- =========================================
-         JAVASCRIPT
-    ========================================== -->
     <script src="script.js"></script>
 
 </body>

@@ -1,890 +1,898 @@
 /* =========================================================
-   NITHIN V S — FUTURISTIC PORTFOLIO
-   CINEMATIC SCROLL ENGINE
+   STUDYOS — FUNCTIONAL JAVASCRIPT
+   Tasks • Timer • Schedule • Navigation • Progress
 ========================================================= */
 
+document.addEventListener("DOMContentLoaded", () => {
 
-/* =========================================================
-   01. ELEMENTS
-========================================================= */
+    /* =========================
+       ELEMENTS
+    ========================= */
 
-const scrollProgress =
-    document.querySelector(".scroll-progress span");
+    const navLinks = document.querySelectorAll(".nav-link");
+    const pageSections = document.querySelectorAll(".page-section");
 
-const projects =
-    document.querySelectorAll(".project");
+    const taskCount = document.getElementById("taskCount");
+    const progressPercent = document.getElementById("progressPercent");
+    const progressPagePercent =
+        document.getElementById("progressPagePercent");
+    const progressPageTasks =
+        document.getElementById("progressPageTasks");
 
-const revealElements =
-    document.querySelectorAll(
-        ".statement h2, .section-heading, .about-content, .service, .contact-content"
-    );
+    const dashboardTaskList =
+        document.getElementById("dashboardTaskList");
+    const allTaskList =
+        document.getElementById("allTaskList");
 
-const hero =
-    document.querySelector(".hero");
+    const quickAddTask =
+        document.getElementById("quickAddTask");
+    const addTaskPage =
+        document.getElementById("addTaskPage");
 
-const heroContent =
-    document.querySelector(".hero-content");
-
-const heroGrid =
-    document.querySelector(".grid");
-
-const heroGlow =
-    document.querySelector(".hero-glow");
-
-const header =
-    document.querySelector(".site-header");
-
-
-/* =========================================================
-   02. SCROLL PROGRESS
-========================================================= */
-
-function updateScrollProgress() {
-
-    const scrollTop = window.scrollY;
-
-    const documentHeight =
-        document.documentElement.scrollHeight -
-        window.innerHeight;
-
-    if (documentHeight <= 0) return;
-
-    const progress =
-        (scrollTop / documentHeight) * 100;
-
-    if (scrollProgress) {
-        scrollProgress.style.height =
-            `${progress}%`;
-    }
-}
+    const focusButton =
+        document.getElementById("focusButton");
+    const focusButtonSecondary =
+        document.getElementById("focusButtonSecondary");
+    const timerDisplay =
+        document.getElementById("timerDisplay");
 
 
-/* =========================================================
-   03. HEADER
-========================================================= */
+    /* =========================
+       LOCAL STORAGE
+    ========================= */
 
-function updateHeader() {
+    const TASK_KEY = "studyOS_tasks";
+    const SCHEDULE_KEY = "studyOS_schedule";
+    const FOCUS_KEY = "studyOS_focusMinutes";
 
-    if (!header) return;
+    const defaultTasks = [
+        {
+            text: "Practice Java OOP",
+            completed: false
+        },
+        {
+            text: "Study DBMS",
+            completed: false
+        },
+        {
+            text: "Complete Web Development",
+            completed: false
+        },
+        {
+            text: "Practice Python",
+            completed: false
+        }
+    ];
 
-    if (window.scrollY > 40) {
-        header.classList.add("scrolled");
-    } else {
-        header.classList.remove("scrolled");
-    }
-}
+    const defaultSchedule = [
+        { completed: true },
+        { completed: false },
+        { completed: false },
+        { completed: false }
+    ];
 
 
-/* =========================================================
-   04. HERO SCROLL
-========================================================= */
+    /* =========================
+       LOAD TASKS
+    ========================= */
 
-function updateHero() {
+    function loadTasks() {
 
-    if (!hero) return;
+        try {
 
-    const scrollY =
-        window.scrollY;
+            const saved =
+                localStorage.getItem(TASK_KEY);
 
-    const heroHeight =
-        hero.offsetHeight;
+            if (!saved) {
 
-    if (scrollY < heroHeight) {
+                localStorage.setItem(
+                    TASK_KEY,
+                    JSON.stringify(defaultTasks)
+                );
 
-        const progress =
-            Math.min(
-                scrollY / heroHeight,
-                1
+                return [...defaultTasks];
+            }
+
+            const parsed = JSON.parse(saved);
+
+            if (!Array.isArray(parsed)) {
+                return [...defaultTasks];
+            }
+
+            return parsed;
+
+        } catch (error) {
+
+            console.error(
+                "Unable to load tasks:",
+                error
             );
 
-
-        /* ---------------------------------------------
-           HERO CONTENT
-        --------------------------------------------- */
-
-        if (heroContent) {
-
-            const moveY =
-                progress * -120;
-
-            const scale =
-                1 - progress * 0.08;
-
-            const opacity =
-                1 - progress * 0.85;
-
-            heroContent.style.transform =
-                `translate3d(0, ${moveY}px, 0) scale(${scale})`;
-
-            heroContent.style.opacity =
-                opacity;
-        }
-
-
-        /* ---------------------------------------------
-           GRID
-        --------------------------------------------- */
-
-        if (heroGrid) {
-
-            heroGrid.style.transform =
-                `translate3d(0, ${progress * 80}px, 0)`;
-        }
-
-
-        /* ---------------------------------------------
-           GLOW
-        --------------------------------------------- */
-
-        if (heroGlow) {
-
-            const glowScale =
-                1 + progress * 0.35;
-
-            heroGlow.style.transform =
-                `translateY(-50%) scale(${glowScale})`;
-
-            heroGlow.style.opacity =
-                1 - progress * 0.5;
-        }
-
-    } else {
-
-        if (heroContent) {
-            heroContent.style.opacity = "0";
+            return [...defaultTasks];
         }
     }
-}
 
 
-/* =========================================================
-   05. CINEMATIC PROJECT ENGINE
-========================================================= */
+    function saveTasks(tasks) {
 
-function updateProjects() {
+        localStorage.setItem(
+            TASK_KEY,
+            JSON.stringify(tasks)
+        );
+    }
 
-    projects.forEach((project) => {
 
-        const visual =
-            project.querySelector(
-                ".project-visual"
+    let tasks = loadTasks();
+
+
+    /* =========================
+       LOAD SCHEDULE
+    ========================= */
+
+    function loadSchedule() {
+
+        try {
+
+            const saved =
+                localStorage.getItem(SCHEDULE_KEY);
+
+            if (!saved) {
+
+                localStorage.setItem(
+                    SCHEDULE_KEY,
+                    JSON.stringify(defaultSchedule)
+                );
+
+                return [...defaultSchedule];
+            }
+
+            const parsed = JSON.parse(saved);
+
+            if (!Array.isArray(parsed)) {
+                return [...defaultSchedule];
+            }
+
+            return parsed;
+
+        } catch (error) {
+
+            console.error(
+                "Unable to load schedule:",
+                error
             );
 
-        const info =
-            project.querySelector(
-                ".project-info"
-            );
-
-        const meta =
-            project.querySelector(
-                ".project-meta"
-            );
-
-        const link =
-            project.querySelector(
-                ".project-link"
-            );
-
-        if (!visual) return;
+            return [...defaultSchedule];
+        }
+    }
 
 
-        /* ---------------------------------------------
-           PROJECT POSITION
-        --------------------------------------------- */
+    function saveSchedule(schedule) {
 
-        const rect =
-            project.getBoundingClientRect();
-
-        const viewportHeight =
-            window.innerHeight;
+        localStorage.setItem(
+            SCHEDULE_KEY,
+            JSON.stringify(schedule)
+        );
+    }
 
 
-        /*
-            Project timeline:
-
-            0.00 → project starts entering
-            0.20 → fully entered
-            0.75 → main cinematic scene
-            1.00 → project leaves
-        */
-
-        const startPoint =
-            viewportHeight * 0.85;
-
-        const endPoint =
-            viewportHeight * 0.05;
-
-        const progress =
-            (startPoint - rect.top) /
-            (startPoint - endPoint);
-
-        const p =
-            Math.max(
-                0,
-                Math.min(
-                    1,
-                    progress
-                )
-            );
+    let schedule = loadSchedule();
 
 
-        /* ---------------------------------------------
-           ACTIVE PROJECT
-        --------------------------------------------- */
+    /* =========================
+       UPDATE STATISTICS
+    ========================= */
 
-        if (p > 0.08 && p < 0.92) {
+    function updateStatistics() {
 
-            project.classList.add(
-                "project-active"
-            );
+        const total = tasks.length;
 
-        } else {
+        const completed =
+            tasks.filter(
+                task => task.completed
+            ).length;
 
-            project.classList.remove(
-                "project-active"
+        const remaining =
+            total - completed;
+
+        const percentage =
+            total === 0
+                ? 0
+                : Math.round(
+                    (completed / total) * 100
+                );
+
+
+        if (taskCount) {
+
+            taskCount.textContent =
+                remaining;
+        }
+
+
+        if (progressPercent) {
+
+            progressPercent.textContent =
+                `${percentage}%`;
+        }
+
+
+        if (progressPagePercent) {
+
+            progressPagePercent.textContent =
+                `${percentage}%`;
+        }
+
+
+        if (progressPageTasks) {
+
+            progressPageTasks.textContent =
+                total;
+        }
+    }
+
+
+    /* =========================
+       CREATE TASK ELEMENT
+    ========================= */
+
+    function createTaskElement(task, index) {
+
+        const label =
+            document.createElement("label");
+
+        label.className = "task";
+
+
+        const checkbox =
+            document.createElement("input");
+
+        checkbox.type = "checkbox";
+
+        checkbox.checked =
+            Boolean(task.completed);
+
+
+        const check =
+            document.createElement("span");
+
+        check.className =
+            "task-check";
+
+
+        const text =
+            document.createElement("span");
+
+        text.className =
+            "task-text";
+
+        text.textContent =
+            task.text;
+
+
+        label.appendChild(checkbox);
+        label.appendChild(check);
+        label.appendChild(text);
+
+
+        checkbox.addEventListener(
+            "change",
+            () => {
+
+                tasks[index].completed =
+                    checkbox.checked;
+
+                saveTasks(tasks);
+
+                renderTasks();
+
+                updateStatistics();
+            }
+        );
+
+
+        return label;
+    }
+
+
+    /* =========================
+       RENDER TASKS
+    ========================= */
+
+    function renderTasks() {
+
+        /* Dashboard */
+
+        if (dashboardTaskList) {
+
+            dashboardTaskList.innerHTML = "";
+
+            tasks.forEach(
+                (task, index) => {
+
+                    const element =
+                        createTaskElement(
+                            task,
+                            index
+                        );
+
+                    dashboardTaskList.appendChild(
+                        element
+                    );
+                }
             );
         }
 
 
-        /* ---------------------------------------------
-           VISUAL VARIABLES
-        --------------------------------------------- */
+        /* Tasks Page */
 
-        let scale;
-        let translateY;
-        let radius;
-        let opacity;
+        if (allTaskList) {
+
+            allTaskList.innerHTML = "";
 
 
-        /* ---------------------------------------------
-           ENTER
-        --------------------------------------------- */
+            if (tasks.length === 0) {
 
-        if (p < 0.20) {
+                const empty =
+                    document.createElement("p");
 
-            const enter =
-                p / 0.20;
+                empty.textContent =
+                    "No tasks yet. Add your first task.";
 
-            scale =
-                0.94 +
-                enter * 0.06;
+                empty.className =
+                    "empty-task-message";
 
-            translateY =
-                45 -
-                enter * 45;
-
-            radius =
-                24 -
-                enter * 14;
-
-            opacity =
-                0.45 +
-                enter * 0.55;
-        }
-
-
-        /* ---------------------------------------------
-           MAIN CINEMATIC SCENE
-        --------------------------------------------- */
-
-        else if (p < 0.75) {
-
-            const middle =
-                (p - 0.20) / 0.55;
-
-            scale =
-                1 +
-                middle * 0.035;
-
-            translateY =
-                middle * -18;
-
-            radius =
-                10 -
-                middle * 6;
-
-            opacity =
-                1;
-        }
-
-
-        /* ---------------------------------------------
-           EXIT
-        --------------------------------------------- */
-
-        else {
-
-            const exit =
-                (p - 0.75) / 0.25;
-
-            scale =
-                1.035 -
-                exit * 0.06;
-
-            translateY =
-                -18 -
-                exit * 55;
-
-            radius =
-                4 +
-                exit * 18;
-
-            opacity =
-                1 -
-                exit * 0.55;
-        }
-
-
-        /* ---------------------------------------------
-           APPLY VISUAL
-        --------------------------------------------- */
-
-        visual.style.transform =
-            `translate3d(0, ${translateY}px, 0) scale(${scale})`;
-
-        visual.style.opacity =
-            opacity;
-
-        visual.style.borderRadius =
-            `${radius}px`;
-
-
-        /* ---------------------------------------------
-           PROJECT INFORMATION
-        --------------------------------------------- */
-
-        if (info) {
-
-            let infoProgress;
-
-            if (p < 0.45) {
-
-                infoProgress = 0;
+                allTaskList.appendChild(
+                    empty
+                );
 
             } else {
 
-                infoProgress =
-                    Math.min(
-                        1,
-                        (p - 0.45) / 0.30
-                    );
-            }
+                tasks.forEach(
+                    (task, index) => {
 
-            const infoY =
-                50 -
-                infoProgress * 50;
+                        const element =
+                            createTaskElement(
+                                task,
+                                index
+                            );
 
-            const infoOpacity =
-                infoProgress;
-
-            info.style.transform =
-                `translate3d(0, ${infoY}px, 0)`;
-
-            info.style.opacity =
-                infoOpacity;
-        }
-
-
-        /* ---------------------------------------------
-           PROJECT META
-        --------------------------------------------- */
-
-        if (meta) {
-
-            const metaProgress =
-                Math.min(
-                    1,
-                    p / 0.30
-                );
-
-            const metaY =
-                30 -
-                metaProgress * 30;
-
-            meta.style.transform =
-                `translate3d(0, ${metaY}px, 0)`;
-
-            meta.style.opacity =
-                metaProgress;
-        }
-
-
-        /* ---------------------------------------------
-           PROJECT LINK
-        --------------------------------------------- */
-
-        if (link) {
-
-            const linkProgress =
-                Math.max(
-                    0,
-                    Math.min(
-                        1,
-                        (p - 0.55) / 0.25
-                    )
-                );
-
-            link.style.transform =
-                `translate3d(
-                    0,
-                    ${40 - linkProgress * 40}px,
-                    0
-                )`;
-
-            link.style.opacity =
-                linkProgress;
-        }
-
-    });
-}
-
-
-/* =========================================================
-   06. GENERAL PARALLAX
-========================================================= */
-
-function updateParallax() {
-
-    const parallaxElements =
-        document.querySelectorAll(
-            ".work-count"
-        );
-
-    parallaxElements.forEach(
-        (element) => {
-
-            const rect =
-                element.getBoundingClientRect();
-
-            const viewportCenter =
-                window.innerHeight / 2;
-
-            const distance =
-                rect.top -
-                viewportCenter;
-
-            const movement =
-                distance * -0.015;
-
-            element.style.transform =
-                `translate3d(0, ${movement}px, 0)`;
-        }
-    );
-}
-
-
-/* =========================================================
-   07. REVEAL ON SCROLL
-========================================================= */
-
-const revealObserver =
-    new IntersectionObserver(
-        (entries) => {
-
-            entries.forEach(
-                (entry) => {
-
-                    if (
-                        entry.isIntersecting
-                    ) {
-
-                        entry.target.classList.add(
-                            "is-visible"
+                        allTaskList.appendChild(
+                            element
                         );
                     }
-                }
-            );
-        },
-        {
-            threshold: 0.15
-        }
-    );
-
-
-revealElements.forEach(
-    (element) => {
-
-        revealObserver.observe(
-            element
-        );
-    }
-);
-
-
-/* =========================================================
-   08. PROJECT IMAGE OBSERVER
-========================================================= */
-
-const projectObserver =
-    new IntersectionObserver(
-        (entries) => {
-
-            entries.forEach(
-                (entry) => {
-
-                    if (
-                        entry.isIntersecting
-                    ) {
-
-                        entry.target.classList.add(
-                            "project-active"
-                        );
-
-                    } else {
-
-                        entry.target.classList.remove(
-                            "project-active"
-                        );
-                    }
-                }
-            );
-        },
-        {
-            threshold: 0.35
-        }
-    );
-
-
-projects.forEach(
-    (project) => {
-
-        projectObserver.observe(
-            project
-        );
-    }
-);
-
-
-/* =========================================================
-   09. SMOOTH NAVIGATION
-========================================================= */
-
-const navigationLinks =
-    document.querySelectorAll(
-        ".main-nav a, .logo, .nav-contact, .hero-cta"
-    );
-
-
-navigationLinks.forEach(
-    (link) => {
-
-        link.addEventListener(
-            "click",
-            (event) => {
-
-                const targetId =
-                    link.getAttribute(
-                        "href"
-                    );
-
-                if (
-                    !targetId ||
-                    !targetId.startsWith("#")
-                ) {
-                    return;
-                }
-
-                const target =
-                    document.querySelector(
-                        targetId
-                    );
-
-                if (!target) return;
-
-                event.preventDefault();
-
-                target.scrollIntoView({
-                    behavior: "smooth",
-                    block: "start"
-                });
-            }
-        );
-    }
-);
-
-
-/* =========================================================
-   10. ACTIVE NAVIGATION
-========================================================= */
-
-const sections =
-    document.querySelectorAll(
-        "section[id]"
-    );
-
-const navLinks =
-    document.querySelectorAll(
-        ".main-nav a"
-    );
-
-
-const navObserver =
-    new IntersectionObserver(
-        (entries) => {
-
-            entries.forEach(
-                (entry) => {
-
-                    if (
-                        !entry.isIntersecting
-                    ) {
-                        return;
-                    }
-
-                    const currentId =
-                        entry.target.getAttribute(
-                            "id"
-                        );
-
-                    navLinks.forEach(
-                        (link) => {
-
-                            const linkTarget =
-                                link.getAttribute(
-                                    "href"
-                                );
-
-                            if (
-                                linkTarget ===
-                                `#${currentId}`
-                            ) {
-
-                                link.classList.add(
-                                    "active"
-                                );
-
-                            } else {
-
-                                link.classList.remove(
-                                    "active"
-                                );
-                            }
-                        }
-                    );
-                }
-            );
-        },
-        {
-            rootMargin:
-                "-35% 0px -55% 0px"
-        }
-    );
-
-
-sections.forEach(
-    (section) => {
-
-        navObserver.observe(
-            section
-        );
-    }
-);
-
-
-/* =========================================================
-   11. PROJECT / CTA MAGNETIC EFFECT
-========================================================= */
-
-const projectLinks =
-    document.querySelectorAll(
-        ".project-link, .hero-cta, .contact-button"
-    );
-
-
-projectLinks.forEach(
-    (link) => {
-
-        link.addEventListener(
-            "mousemove",
-            (event) => {
-
-                if (
-                    window.innerWidth <= 650
-                ) {
-                    return;
-                }
-
-                const rect =
-                    link.getBoundingClientRect();
-
-                const x =
-                    event.clientX -
-                    rect.left -
-                    rect.width / 2;
-
-                const y =
-                    event.clientY -
-                    rect.top -
-                    rect.height / 2;
-
-                link.style.transform =
-                    `translate(
-                        ${x * 0.08}px,
-                        ${y * 0.08}px
-                    )`;
-            }
-        );
-
-
-        link.addEventListener(
-            "mouseleave",
-            () => {
-
-                link.style.transform =
-                    "translate(0, 0)";
-            }
-        );
-    }
-);
-
-
-/* =========================================================
-   12. SERVICE HOVER
-========================================================= */
-
-const services =
-    document.querySelectorAll(
-        ".service"
-    );
-
-
-services.forEach(
-    (service) => {
-
-        service.addEventListener(
-            "mouseenter",
-            () => {
-
-                service.classList.add(
-                    "service-hover"
                 );
             }
-        );
-
-
-        service.addEventListener(
-            "mouseleave",
-            () => {
-
-                service.classList.remove(
-                    "service-hover"
-                );
-            }
-        );
+        }
     }
-);
 
 
-/* =========================================================
-   13. HERO MOUSE PARALLAX
-========================================================= */
+    /* =========================
+       ADD NEW TASK
+    ========================= */
 
-document.addEventListener(
-    "mousemove",
-    (event) => {
+    function addNewTask() {
 
-        if (!hero) return;
+        const taskText =
+            prompt("Enter your task:");
 
-        if (
-            window.innerWidth <= 650
-        ) {
+
+        if (taskText === null) {
             return;
         }
 
-        const x =
-            (event.clientX /
-                window.innerWidth) -
-            0.5;
 
-        const y =
-            (event.clientY /
-                window.innerHeight) -
-            0.5;
+        const cleanedText =
+            taskText.trim();
 
 
-        const title =
-            document.querySelector(
-                ".hero-title"
+        if (!cleanedText) {
+
+            alert(
+                "Please enter a task."
+            );
+
+            return;
+        }
+
+
+        tasks.push({
+
+            text: cleanedText,
+
+            completed: false
+        });
+
+
+        saveTasks(tasks);
+
+        renderTasks();
+
+        updateStatistics();
+    }
+
+
+    if (quickAddTask) {
+
+        quickAddTask.addEventListener(
+            "click",
+            addNewTask
+        );
+    }
+
+
+    if (addTaskPage) {
+
+        addTaskPage.addEventListener(
+            "click",
+            addNewTask
+        );
+    }
+
+
+    /* =========================
+       SCHEDULE
+    ========================= */
+
+    function setupSchedule() {
+
+        const scheduleItems =
+            document.querySelectorAll(
+                ".schedule-item"
             );
 
 
-        if (title) {
+        scheduleItems.forEach(
+            (item, index) => {
 
-            title.style.transform =
-                `translate3d(
-                    ${x * 10}px,
-                    ${y * 6}px,
-                    0
-                )`;
+                const button =
+                    item.querySelector(
+                        ".schedule-status"
+                    );
+
+
+                if (!button) {
+                    return;
+                }
+
+
+                const isCompleted =
+                    Boolean(
+                        schedule[index]?.completed
+                    );
+
+
+                updateScheduleUI(
+                    item,
+                    button,
+                    isCompleted
+                );
+
+
+                button.addEventListener(
+                    "click",
+                    () => {
+
+                        if (!schedule[index]) {
+
+                            schedule[index] = {
+                                completed: false
+                            };
+                        }
+
+
+                        schedule[index].completed =
+                            !schedule[index].completed;
+
+
+                        saveSchedule(schedule);
+
+
+                        updateScheduleUI(
+                            item,
+                            button,
+                            schedule[index].completed
+                        );
+                    }
+                );
+            }
+        );
+    }
+
+
+    function updateScheduleUI(
+        item,
+        button,
+        completed
+    ) {
+
+        if (completed) {
+
+            item.classList.add(
+                "completed"
+            );
+
+            button.classList.add(
+                "completed-status"
+            );
+
+            button.textContent =
+                "✓ Completed";
+
+        } else {
+
+            item.classList.remove(
+                "completed"
+            );
+
+            button.classList.remove(
+                "completed-status"
+            );
+
+            button.textContent =
+                "Upcoming";
         }
     }
-);
 
 
-/* =========================================================
-   14. SCROLL LOOP
-========================================================= */
+    /* =========================
+       FOCUS TIMER
+    ========================= */
 
-let ticking = false;
+    const DEFAULT_TIMER =
+        25 * 60;
 
 
-function handleScroll() {
+    let timerSeconds =
+        DEFAULT_TIMER;
 
-    if (ticking) return;
+    let timerInterval =
+        null;
 
-    window.requestAnimationFrame(
-        () => {
+    let timerRunning =
+        false;
 
-            updateScrollProgress();
-            updateHeader();
-            updateHero();
-            updateProjects();
-            updateParallax();
 
-            ticking = false;
+    function formatTime(seconds) {
+
+        const minutes =
+            Math.floor(
+                seconds / 60
+            );
+
+        const remainingSeconds =
+            seconds % 60;
+
+
+        return (
+            String(minutes).padStart(2, "0") +
+            ":" +
+            String(remainingSeconds).padStart(2, "0")
+        );
+    }
+
+
+    function updateTimerDisplay() {
+
+        if (!timerDisplay) {
+            return;
+        }
+
+        timerDisplay.textContent =
+            formatTime(timerSeconds);
+    }
+
+
+    function setFocusButtonState() {
+
+        if (!focusButton) {
+            return;
+        }
+
+
+        const icon =
+            focusButton.querySelector("span");
+
+
+        if (icon) {
+
+            icon.textContent =
+                timerRunning
+                    ? "Ⅱ"
+                    : "▶";
+        }
+
+
+        const textNodes =
+            [...focusButton.childNodes]
+                .filter(
+                    node =>
+                        node.nodeType ===
+                        Node.TEXT_NODE
+                );
+
+
+        if (textNodes.length > 0) {
+
+            textNodes[
+                textNodes.length - 1
+            ].textContent =
+                timerRunning
+                    ? " PAUSE"
+                    : " START FOCUS";
+        }
+    }
+
+
+    function startTimer() {
+
+        if (timerRunning) {
+            return;
+        }
+
+
+        if (timerSeconds <= 0) {
+
+            timerSeconds =
+                DEFAULT_TIMER;
+
+            updateTimerDisplay();
+        }
+
+
+        timerRunning = true;
+
+        setFocusButtonState();
+
+
+        timerInterval =
+            setInterval(
+                () => {
+
+                    timerSeconds--;
+
+                    updateTimerDisplay();
+
+
+                    if (timerSeconds <= 0) {
+
+                        finishTimer();
+                    }
+
+                },
+                1000
+            );
+    }
+
+
+    function pauseTimer() {
+
+        if (!timerRunning) {
+            return;
+        }
+
+
+        clearInterval(
+            timerInterval
+        );
+
+
+        timerInterval = null;
+
+        timerRunning = false;
+
+        setFocusButtonState();
+    }
+
+
+    function finishTimer() {
+
+        clearInterval(
+            timerInterval
+        );
+
+
+        timerInterval = null;
+
+        timerRunning = false;
+
+        timerSeconds = 0;
+
+
+        updateTimerDisplay();
+
+        setFocusButtonState();
+
+
+        const currentFocus =
+            Number(
+                localStorage.getItem(
+                    FOCUS_KEY
+                )
+            ) || 0;
+
+
+        localStorage.setItem(
+            FOCUS_KEY,
+            String(currentFocus + 25)
+        );
+
+
+        alert(
+            "Focus session complete. Good work."
+        );
+    }
+
+
+    if (focusButton) {
+
+        focusButton.addEventListener(
+            "click",
+            () => {
+
+                if (timerRunning) {
+
+                    pauseTimer();
+
+                } else {
+
+                    startTimer();
+                }
+            }
+        );
+    }
+
+
+    if (focusButtonSecondary) {
+
+        focusButtonSecondary.addEventListener(
+            "click",
+            () => {
+
+                const dashboard =
+                    document.getElementById(
+                        "dashboard"
+                    );
+
+
+                if (dashboard) {
+
+                    dashboard.scrollIntoView({
+                        behavior: "smooth",
+                        block: "start"
+                    });
+                }
+
+
+                if (timerRunning) {
+
+                    pauseTimer();
+
+                } else {
+
+                    startTimer();
+                }
+            }
+        );
+    }
+
+
+    updateTimerDisplay();
+
+    setFocusButtonState();
+
+
+    /* =========================
+       SIDEBAR NAVIGATION
+    ========================= */
+
+    function showSection(sectionId) {
+
+        pageSections.forEach(
+            section => {
+
+                section.classList.remove(
+                    "active"
+                );
+
+                section.style.display =
+                    "none";
+            }
+        );
+
+
+        const target =
+            document.getElementById(
+                sectionId
+            );
+
+
+        if (target) {
+
+            target.classList.add(
+                "active"
+            );
+
+            target.style.display =
+                "block";
+        }
+
+
+        navLinks.forEach(
+            link => {
+
+                link.classList.toggle(
+                    "active",
+                    link.dataset.section ===
+                    sectionId
+                );
+            }
+        );
+
+
+        window.scrollTo({
+
+            top: 0,
+
+            behavior: "smooth"
+        });
+    }
+
+
+    navLinks.forEach(
+        link => {
+
+            link.addEventListener(
+                "click",
+                event => {
+
+                    event.preventDefault();
+
+
+                    const section =
+                        link.dataset.section;
+
+
+                    if (section) {
+
+                        showSection(
+                            section
+                        );
+                    }
+                }
+            );
         }
     );
 
-    ticking = true;
-}
+
+    /* =========================
+       INITIALIZE
+    ========================= */
+
+    renderTasks();
+
+    updateStatistics();
+
+    setupSchedule();
 
 
-window.addEventListener(
-    "scroll",
-    handleScroll,
-    {
-        passive: true
-    }
-);
+    pageSections.forEach(
+        section => {
 
+            if (
+                !section.classList.contains(
+                    "active"
+                )
+            ) {
 
-/* =========================================================
-   15. INITIAL STATE
-========================================================= */
+                section.style.display =
+                    "none";
 
-updateScrollProgress();
-updateHeader();
-updateHero();
-updateProjects();
-updateParallax();
+            } else {
 
+                section.style.display =
+                    "block";
+            }
+        }
+    );
 
-/* =========================================================
-   16. PAGE LOAD
-========================================================= */
-
-window.addEventListener(
-    "load",
-    () => {
-
-        document.body.classList.add(
-            "page-loaded"
-        );
-
-        updateScrollProgress();
-        updateHeader();
-        updateHero();
-        updateProjects();
-        updateParallax();
-    }
-);
+});
